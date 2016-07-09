@@ -60,7 +60,6 @@ class Ship {
 
 
 window.onload = () => {
-    // document.body.innerHTML = greeter(user);
 	var infodiv = document.getElementById("area");
     var cell = new Cell(0,0);
     console.log(cell.getHit());
@@ -71,7 +70,8 @@ window.onload = () => {
 class Socket {
 	private socket: Object;
 	constructor() {
-		this.socket = new WebSocket('ws://echo.websocket.org');
+		// this.socket = new WebSocket('ws://echo.websocket.org');
+		this.socket = new WebSocket('ws://'+window.location.host);
 	}
 }
 
