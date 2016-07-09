@@ -17,6 +17,8 @@ sudo apt-get install python3.5
 
 sudo apt-get install python3-pip
 
+sudo pip3 install virtualenv
+
 at root dir:
 virtualenv --no-site-packages --distribute -p /usr/bin/python3.5 --prompt="(<project_name>)" <venv_name>
 
