@@ -6,10 +6,6 @@ for typescript:
 
 - then tsc file.ts
 
-<<<<<<< HEAD
-make  >> makes typescript
-
-=======
 gulp makes typescript
 make makes typescript
 
@@ -31,4 +27,3 @@ pip3 install aiohttp
 sudo apt-get install gunicorn
 
 gunicorn simple:my_web_app --bind localhost:8080 --worker-class aiohttp.worker.GunicornWebWorker
->>>>>>> d7f4a7ee98deef4e5d3af6635966235d514d1fcb
