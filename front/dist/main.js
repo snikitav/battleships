@@ -55,6 +55,17 @@ var Ship = (function () {
     }
     return Ship;
 }());
+<<<<<<< Updated upstream
+=======
+var infodiv = document.getElementById("area");
+var socket = new WebSocket('ws://battleships.local/');
+socket.onopen = function () {
+    socket.send("message");
+};
+socket.onmessage = function (message) {
+    // console.log(message.data);
+};
+>>>>>>> Stashed changes
 window.onload = function () {
     // document.body.innerHTML = greeter(user);
     var infodiv = document.getElementById("area");

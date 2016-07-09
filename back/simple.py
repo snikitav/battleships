@@ -30,6 +30,8 @@ def wshandler(request):
             for ws in request.app['sockets']:
                 if ws is not resp:
                     ws.send_str(msg.data)
+                    print(ws.send_str(msg.data)
+)
         else:
             break
 
