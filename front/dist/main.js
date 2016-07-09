@@ -55,18 +55,17 @@ var Ship = (function () {
     }
     return Ship;
 }());
-var infodiv = document.getElementById("area");
-var socket = new WebSocket('ws://echo.websocket.org');
-socket.onopen = function () {
-    socket.send("message");
-};
-socket.onmessage = function (message) {
-    // console.log(message.data);
-};
 window.onload = function () {
     // document.body.innerHTML = greeter(user);
+    var infodiv = document.getElementById("area");
     var cell = new Cell(0, 0);
     console.log(cell.getHit());
     cell.doHit();
     console.log(cell.getHit());
 };
+var Socket = (function () {
+    function Socket() {
+        this.socket = new WebSocket('ws://echo.websocket.org');
+    }
+    return Socket;
+}());
