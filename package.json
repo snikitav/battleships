@@ -1,0 +1,26 @@
+{
+  "name": "battleships",
+  "version": "1.0.0",
+  "description": "Battleships Under Construction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snikitav/battleships.git"
+  },
+  "keywords": [
+    "battelship"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snikitav/battleships/issues"
+  },
+  "homepage": "https://github.com/snikitav/battleships#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.13.6"
+  }
+}

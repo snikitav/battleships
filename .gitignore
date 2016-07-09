@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 /venv/
-=======
+node_modules/
 Vagrantfile
-venv
 .DS_Store
->>>>>>> c9f26e21202696745d2d3ec8bef3df1aabf12993
+.vagrant

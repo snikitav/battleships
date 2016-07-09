@@ -1,9 +1,9 @@
+'use strict';
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-'use strict';
 // var socket = new WebSocket("127.0.0.1", "TCP", "");
 // var Socket = window['WebSocket'] || window['MozWebSocket'];
 // function greeter(person: string) : string {
@@ -42,8 +42,16 @@ var ShipCell = (function (_super) {
     return ShipCell;
 }(Cell));
 var Ship = (function () {
-    function Ship(size) {
+    function Ship(size, start, horizontal) {
         this.cells = new Cell[size];
+        // let horizontal;
+        // if(start[0] == end[0]) {
+        // 	horizontal = true;
+        // } else {
+        // 	horizontal = false;
+        // }
+        for (var cell in this.cells) {
+        }
     }
     return Ship;
 }());
