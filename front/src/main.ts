@@ -58,8 +58,6 @@ class Ship {
 	}
 }
 
-<<<<<<< Updated upstream
-=======
 var infodiv = document.getElementById("area");
 
 var socket = new WebSocket('ws://battleships.local/');
@@ -70,8 +68,6 @@ socket.onopen = () => {
 socket.onmessage = (message) => {
 	// console.log(message.data);
 }
-
->>>>>>> Stashed changes
 
 window.onload = () => {
 	var infodiv = document.getElementById("area");
