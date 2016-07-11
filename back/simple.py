@@ -1,73 +1,44 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.5.0
 """Example for aiohttp.web websocket server
 """
 
 import asyncio
-import os
-from aiohttp.web import Application, Response, MsgType, WebSocketResponse
+from aiohttp import web
 
-WS_FILE = os.path.join(os.path.dirname(__file__), '/home/vagrant/battleships/front/index.html')
+import aiohttp_jinja2
+import jinja2
 
 
-@asyncio.coroutine
-def wshandler(request):
-    resp = WebSocketResponse()
-    ok, protocol = resp.can_start(request)
-    if not ok:
-        with open(WS_FILE, 'rb') as fp:
-            return Response(body=fp.read(), content_type='text/html')
+@aiohttp_jinja2.template('index.html')
+async def handle(request):
+    name = request.match_info.get('name', "Anonymous")
+    text = "Hello, " + name
 
-    yield from resp.prepare(request)
-    print('Someone joined.')
-    for ws in request.app['sockets']:
-        ws.send_str('Someone joined')
-    request.app['sockets'].append(resp)
+    return {'name': 'Andrew'}
 
-    while True:
-        msg = yield from resp.receive()
+async def wshandler(request):
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
 
-        if msg.tp == MsgType.text:
-            for ws in request.app['sockets']:
-                if ws is not resp:
-                    ws.send_str(msg.data)
-                    print(ws.send_str(msg.data)
-)
-        else:
+    async for msg in ws:
+        if msg.tp == web.MsgType.text:
+            ws.send_str("XXXXXX, {}".format(msg.data))
+        elif msg.tp == web.MsgType.binary:
+            ws.send_bytes(msg.data)
+        elif msg.tp == web.MsgType.close:
             break
 
-    request.app['sockets'].remove(resp)
-    print('Someone disconnected.')
-    for ws in request.app['sockets']:
-        ws.send_str('Someone disconnected.')
-    return resp
+    return ws
 
 
-@asyncio.coroutine
-def init(loop):
-    app = Application(loop=loop)
-    app['sockets'] = []
-    app.router.add_route('GET', '/', wshandler)
-
-    handler = app.make_handler()
-    srv = yield from loop.create_server(handler, '127.0.0.1', 8080)
-    print("Server started at http://127.0.0.1:8080")
-    return app, srv, handler
+app = web.Application()
+app.router.add_route('GET', '/ws', wshandler)
+app.router.add_route('GET', '/', handle)
 
 
-@asyncio.coroutine
-def finish(app, srv, handler):
-    for ws in app['sockets']:
-        ws.close()
-    app['sockets'].clear()
-    yield from asyncio.sleep(0.1)
-    srv.close()
-    yield from handler.finish_connections()
-    yield from srv.wait_closed()
+aiohttp_jinja2.setup(app,
+    loader=jinja2.FileSystemLoader('/home/vagrant/battleships/front'))
+
+web.run_app(app)
 
 
-loop = asyncio.get_event_loop()
-app, srv, handler = loop.run_until_complete(init(loop))
-try:
-    loop.run_forever()
-except KeyboardInterrupt:
-    loop.run_until_complete(finish(app, srv, handler))
